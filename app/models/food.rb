@@ -3,7 +3,7 @@ class Food < ApplicationRecord
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than: 0.01}
 
-  has_one :category
+  belongs_to :category
 
   def self.by_letter(letter)
     where("name LIKE ?", "#{letter}%").order(:name)
