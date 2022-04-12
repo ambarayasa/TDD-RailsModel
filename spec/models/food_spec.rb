@@ -1,12 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Food, type: :model do
-  #create category
-  category = Category.create(
-    name: 'Main Course'
-  )
-  
-  it 'is valid with a name and a description' do
+
+  it 'is valid with a name and a description, category' do
     food = Food.new(
       name: 'Nasi Uduk',
       description: 'Betawi style steamed rice cooked in coconut milk. Delicious!',
@@ -21,7 +17,8 @@ RSpec.describe Food, type: :model do
     food = Food.new(
       name: nil,
       description: 'Betawi style steamed rice cooked in coconut milk. Delicious!',
-      price: 15000.0
+      price: 15000.0,
+      category_id: 1
     )
 
     food.valid?
@@ -33,7 +30,8 @@ RSpec.describe Food, type: :model do
     food = Food.new(
       name: 'Nasi Uduk',
       description: nil,
-      price: 15000.0
+      price: 15000.0,
+      category_id: 1
     )
 
     food.valid?
@@ -45,7 +43,8 @@ RSpec.describe Food, type: :model do
     food = Food.new(
       name: 'Nasi Uduk',
       description: 'Betawi style steamed rice cooked in coconut milk. Delicious!',
-      price: nil
+      price: nil,
+      category_id: 1
     )
 
     food.valid?
@@ -120,6 +119,6 @@ RSpec.describe Food, type: :model do
       category_id: 1
     )
 
-    expect(food.errors[:price]).to include("must be greater than 0.01")
+    expect(food.errors[:price]).to include("must be greater than or equal to 0.01")
   end
 end
